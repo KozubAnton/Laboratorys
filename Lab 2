@@ -1,0 +1,79 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+using namespace std;
+class Triangle
+{
+private:
+    float a;
+    float b;
+    float c;
+    float p, f;
+    float S;
+public:
+    Triangle()
+    {
+        SetA(0);
+        SetB(0);
+        SetC(0);
+    }
+    Triangle(float valueA, float valueB, float valueC)
+    {
+        SetA(valueA);
+        SetB(valueB);
+        SetC(valueC);
+    }
+    ~Triangle()
+    {
+        
+    }
+    float GetA()
+    {
+        return a;
+    }
+    float GetB()
+    {
+        return b;
+    }
+    float GetC()
+    {
+        return c;
+    }
+    void SetA(float valueA)
+    {
+        a=valueA;
+    }
+    void SetB(float valueB)
+    {
+        b=valueB;
+    }
+    void SetC(float valueC)
+    {
+        c=valueC;
+    }
+    void print_sqr(){
+        float p = ((a+b+c)/2);
+        float f = (p*(p-a)*(p-b)*(p-c));
+        float S = (sqrt(f));
+        cout<<"Сторони трикутника: "<<a<<" см, "<<b<<" см, "<<c<<" см \n Площа = "<<S<<" см^2" <<endl;
+    }
+    friend Triangle NewTriangle(Triangle &first, Triangle &second);
+    };
+Triangle NewTriangle(Triangle &first, Triangle &second){
+    float a = first.GetA() + second.GetA();
+    float b = first.GetB() + second.GetB();
+    float c = first.GetC() + second.GetC();
+    Triangle newTrian(a,b,c);
+    return newTrian;
+}
+int main(){
+    Triangle firstTriangle(4,5,7);
+    Triangle secondTriangle(6,3,8);
+    
+    firstTriangle.print_sqr();
+    secondTriangle.print_sqr();
+    
+    Triangle thirdTriangle = NewTriangle(firstTriangle, secondTriangle);
+    
+    thirdTriangle.print_sqr();
+}
