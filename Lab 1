@@ -1,0 +1,38 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+class cyl{
+public:
+    float a;
+    float b;
+    float v;
+    cyl();
+    cyl(float);
+    ~cyl();
+    float print_val();
+};
+cyl::cyl() //конструктор
+{
+    a=3;//Висота
+    b=5;//Радіус
+    cout<<"Початок розрахунку"<<endl;
+}
+cyl::cyl(float) //конструктор
+{
+    this->a = a;
+    this->b = b;
+}
+float cyl::print_val()
+{
+    v=3.14*b*b*a;
+    cout<<"Висота = "<<a<<" см "<<" \nРадіус = "<<b<<" см "<<" \nПлоща = "<<v<<" см "<<endl;
+    return v;
+}
+cyl::~cyl()//деструктор
+{
+    cout<<"Розрахунок закінчено"<<endl;
+}
+int main(){
+    cyl volume;
+    volume.print_val();
+}
