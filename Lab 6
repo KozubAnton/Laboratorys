@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+//дуб, рослина, дерево, очерет;
+class roslyna
+{
+protected:
+double size;
+    string color;
+public:
+void showRoszlyna() { cout << "Величина рослини = " << size << " метрiв Колiр рослини - " << color << endl;
+}
+roslyna(){}
+roslyna(double size, string color) {
+        this->color = color;
+        this->size = size;
+    }
+};
+class ocheret : protected roslyna {
+protected:
+    string habitat;
+public:
+void showOcheret() { cout << "Величина рослини = " << size << " метрiв \nКолiр рослини - " << color << "\nСередовище проживання очерету - " <<habitat<< endl<<endl;
+}
+ocheret(double size, string color, string habitat){
+        this->color = color;
+        this->size = size;
+        this->habitat = habitat;
+} };
+class derevo : protected roslyna {
+protected:
+    int age;
+public:
+void showDerevo() { cout << "Вiк дерева = " << age << endl; }
+derevo(){}
+derevo(double size, string color, int age) {
+        this->color = color;
+        this->size = size;
+        this->age = age;
+} };
+class dub : protected derevo {
+protected:
+    string kind;
+public:
+void showDub() {
+cout << "Величина рослини = " << size << " метрiв \nКолiр рослини - "
+<< color << "\nВiк дерева = " << age << " рокiв\nВид дуба - " << kind << endl << endl;
+}
+dub(double size, string color, int age, string kind) {
+        this->color = color;
+        this->size = size;
+        this->age = age;
+        this->kind = kind;
+} };
+int main() {
+setlocale(0, "");
+dub dub1(20,"Коричневий", 100,"Звичайний"); dub1.showDub();
+dub dub2(15, "Чорний", 75, "Каштанолистий"); dub2.showDub();
+ocheret och1(2, "Зелений", "Болото"); och1.showOcheret();
+ocheret och2(1, "Жовтий", "Плавень"); och2.showOcheret();
+}
