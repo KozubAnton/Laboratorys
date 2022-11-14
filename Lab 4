@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+class arrays
+{
+double* Ar;
+     const int N = 13;
+public:
+     arrays(){
+          Ar = new double[N];
+          for (int i = 0; i < N; i++)
+{
+Ar[i] = i;
+               i % 2 == 0 ? Ar[i] = i - 3.8 : Ar[i] = i + 1.5;
+          }
+}
+     arrays(const arrays& copy){
+          Ar = new double[N];
+          for (int i = 0; i < N; i++)
+          {
+               Ar[i] = copy.Ar[i];
+} }
+~arrays(){
+delete Ar; }
+     double* GetAr(){
+return Ar; }
+int GetN() {
+return N; }
+};
+ 
+double fun(arrays copy)
+{
+     double suma = 0;
+     for (int i = 0; i < copy.GetN(); i++)
+          if ( *(copy.GetAr() + i) > 0 )
+               suma = suma + (*(copy.GetAr() + i));
+     return suma;
+}
+int main() {
+     arrays Ar1;
+     for (int i = 0; i < Ar1.GetN(); i++)
+     {
+          cout <<  *(Ar1.GetAr() + i) << " ";
+}
+     cout <<"\n Sum = "<< fun(Ar1) << endl;
+}
