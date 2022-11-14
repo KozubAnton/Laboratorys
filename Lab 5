@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+class Ball
+{
+private:
+     double r;
+const double pi = 3.14;
+public:
+     Ball() { r = 0; }
+~Ball() {}
+     Ball(double r)
+{
+if (r <= 0) {
+               cout << "Радiус повинен бути бiльшим за 0\n";
+               Ball::~Ball();
+          }
+          else this->r = r;
+     }
+     void SetR(double r)
+{
+if (r <= 0) {
+               cout << "Радiус повинен бути бiльшим за 0\n";
+return; }
+          else this->r = r;
+     }
+     double GetR() {return r;}
+     double GetV() { return (4.0 / 3.0) * pi * r*r*r;}
+     Ball operator + (Ball a)
+{
+Ball temp;
+          temp.r = r + a.r;
+          return temp;
+     }
+     Ball operator ++()
+{
+r++;
+          return *this;
+     }
+     Ball operator ++(int after)
+     {
+          Ball tempo = *this;
+r++;
+          return tempo;
+     }
+     friend ostream& operator << (ostream& t, Ball& obj);
+};
+ostream& operator << (ostream& t, Ball& obj)
+
+{
+t<<"r="<<obj.r<<" V="<<obj.GetV();
+return t; }
+int main()
+{
+     Ball a(2), b;
+     b.SetR(4);
+     b.GetR();
+     b.GetV();
+     cout << a << endl;
+     Ball c = a + b;
+     cout << "new ball:  "<< c << endl;
+     cout << "inkrement: ";
+     ++c;
+     cout << c << endl;
+}
