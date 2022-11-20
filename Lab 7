@@ -1,0 +1,154 @@
+#include <iostream>
+using namespace std;
+class Chessman {
+public:
+    virtual string fun() = 0;
+int Transformation(string currentPosition, string futurePosition, int& currentPosition1, int& currentPosition2, int& futurePosition1, int& futurePosition2)
+    {
+        switch (currentPosition[0])
+        {
+case 'a': currentPosition1 = 1; break; case 'b': currentPosition1 = 2; break; case 'c': currentPosition1 = 3; break; case 'd': currentPosition1 = 4; break; case 'e': currentPosition1 = 5; break; case 'f': currentPosition1 = 6; break; case 'g': currentPosition1 = 7; break; case 'h': currentPosition1 = 8; break; default: return 1;
+        }
+        switch (futurePosition[0])
+{
+case 'a': futurePosition1 = 1; break; case 'b': futurePosition1 = 2; break; case 'c': futurePosition1 = 3; break; case 'd': futurePosition1 = 4; break; case 'e': futurePosition1 = 5; break; case 'f': futurePosition1 = 6; break; case 'g': futurePosition1 = 7; break; case 'h': futurePosition1 = 8; break; default: return 2;
+}
+switch (currentPosition[1])
+{
+case '1': currentPosition2 = 1; case '2': currentPosition2 = 2; case '3': currentPosition2 = 3; case '4': currentPosition2 = 4; case '5': currentPosition2 = 5; case '6': currentPosition2 = 6; case '7': currentPosition2 = 7; case '8': currentPosition2 = 8; default: return 1;
+}
+switch (futurePosition[1])
+{
+break;
+break;
+break;
+break;
+break;
+break;
+break;
+break;
+case '1': futurePosition2 = 1; break; case '2': futurePosition2 = 2; break; case '3': futurePosition2 = 3; break; case '4': futurePosition2 = 4; break; case '5': futurePosition2 = 5; break; case '6': futurePosition2 = 6; break; case '7': futurePosition2 = 7; break; case '8': futurePosition2 = 8; break; default: return 2;
+}
+return 0; }
+};
+class Kin : public Chessman {
+    string currentPosition, futurePosition;
+public:
+    Kin() {}
+    Kin(string currentPosition, string futurePosition) {
+    this->currentPosition = currentPosition;
+    this->futurePosition = futurePosition;
+}
+cout << "\nКiнь: Початкова позицiя " << currentPosition << ". Хiд у " << futurePosition << endl;
+        int currentPosition1, currentPosition2, futurePosition1, futurePosition2;
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 1)
+            return "Початкову позицiю введено невiрно!";
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 2)
+            return "Позицiю ходу введено невiрно!";
+        if (futurePosition1 > currentPosition1 + 2 ||
+            futurePosition1 < currentPosition1 - 2 ||
+string fun()
+{
+
+futurePosition2 > currentPosition2 + 2 ||
+futurePosition2 < currentPosition2 - 2) return "Хiд не можливий!";
+        if (((currentPosition1 + currentPosition2) % 2
+futurePosition2) % 2 == 0)
+           || ((currentPosition1 + currentPosition2) %
+futurePosition2) % 2 == 1)) return "Хiд не можливий!";
+        return "Хiд можливий!";
+    }
+};
+class Slon : public Chessman {
+    string currentPosition, futurePosition;
+public:
+== 0 && (futurePosition1 +
+2 == 1 && (futurePosition1 +
+    Slon() {}
+    Slon(string currentPosition, string futurePosition) {
+        this->currentPosition = currentPosition;
+        this->futurePosition = futurePosition;
+    }
+    string fun()
+    {
+cout << "\nСлон: Початкова позицiя " << currentPosition << ". Хiд у " << futurePosition << endl;
+        int currentPosition1, currentPosition2, futurePosition1, futurePosition2;
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 1)
+            return "Початкову позицiю введено невiрно!";
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 2)
+            return "Позицiю ходу введено невiрно!";
+        if (((currentPosition1 + currentPosition2) % 2 != (futurePosition1 +
+futurePosition2) % 2)) return "Хiд не можливий!";
+        if ((futurePosition1 + futurePosition2) == (currentPosition1 +
+currentPosition2)
+|| (currentPosition1 - futurePosition1) == (currentPosition2 - futurePosition2)) return "Хiд можливий!";
+        return "Хiд не можливий!";
+    }
+};
+class Tura : public Chessman {
+    string currentPosition, futurePosition;
+public:
+    Tura() {}
+    Tura(string currentPosition, string futurePosition) {
+        this->currentPosition = currentPosition;
+        this->futurePosition = futurePosition;
+    }
+    string fun()
+    {
+cout << "\nТура: Початкова позицiя " << currentPosition << ". Хiд у " << futurePosition << endl;
+        int currentPosition1, currentPosition2, futurePosition1, futurePosition2;
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 1)
+return "Початкову позицiю введено невiрно!";
+
+if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 2)
+            return "Позицiю ходу введено невiрно!";
+        if ((currentPosition1 == futurePosition1 && currentPosition2 !=
+futurePosition2)
+            || (currentPosition2 == futurePosition2 && currentPosition1 !=
+futurePosition1)) return "Хiд можливий!";
+        else return "Хiд не можливий!";
+    }
+};
+class Ferz : public Chessman {
+    string currentPosition, futurePosition;
+public:
+    Ferz() {}
+    Ferz(string currentPosition, string futurePosition) {
+        this->currentPosition = currentPosition;
+        this->futurePosition = futurePosition;
+    }
+    string fun()
+    {
+cout << "\nФерзь: Початкова позицiя " << currentPosition << ". Хiд у " << futurePosition << endl;
+        int currentPosition1, currentPosition2, futurePosition1, futurePosition2;
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 1)
+            return "Початкову позицiю введено невiрно!";
+        if (Transformation(currentPosition, futurePosition, currentPosition1,
+currentPosition2, futurePosition1, futurePosition2) == 2)
+            return "Позицiю ходу введено невiрно!";
+        if ((currentPosition1 == futurePosition1 && currentPosition2 !=
+futurePosition2)
+|| (currentPosition2 == futurePosition2 && currentPosition1 != futurePosition1)) return "Хiд можливий!";
+        else if ((futurePosition1 + futurePosition2) == (currentPosition1 +
+currentPosition2)
+|| (currentPosition1 - futurePosition1) == (currentPosition2 - futurePosition2)) return "Хiд можливий!";
+        else return "Хiд не можливий!";
+    }
+};
+int main() {
+setlocale(0, "");
+Chessman* X[4];
+Kin a("g1", "h3");
+Slon b("b1", "f5");
+Tura c("e4", "a4");
+Ferz e("d4", "g1");
+X[0] = &a; X[1] = &b; X[2] = &c; X[3] = &e; for (int i = 0; i < 4; i++)
+cout << X[i]->fun() << endl;
+}
