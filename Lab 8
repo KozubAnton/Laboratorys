@@ -1,0 +1,109 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+const int N = 3;
+template<class T>
+class Myclass
+{
+    T *ar;
+public:
+    Myclass(){ ar = new T[N]; }
+    ~Myclass(){ delete[] ar; }
+    Myclass(const Myclass& a)
+    {
+        ar = new T[N];
+        for (int i = 0; i < N; i++)
+            ar[i] = a.ar[i];
+    }
+    void Show_ar()
+    {
+        for (int i = 0; i < N; i++)
+            cout << ar[i] << " ";
+    cout << endl;
+}
+T Get_ar() { return ar; } void Set_ar(T& a, int n) {
+T& operator [](int i)
+{
+this->ar[n] = a;}
+if (i<0 || i> N - 1)
+cout << "index " << i << " is out from array";
+        return ar[i];
+    }
+    Myclass operator + (Myclass& b)
+    {
+        Myclass temp;
+        temp.ar = new T[N];
+        for (int i = 0; i < N; i++)
+temp.ar[i] = ar[i] + b.ar[i]; return temp;
+}
+    Myclass & operator = (const Myclass &b)
+    {
+        delete[] ar;
+        ar = new T[N];
+        for (int i = 0; i < N; i++)
+            ar[i] = b.ar[i];
+        return *this;
+} };
+class UserClass
+{
+    int X;
+    double Y;
+    string Z;
+public:
+UserClass(){ X=0;Y=0;Z="";} UserClass(int X, double Y, string Z)
+{
+        this->X = X;
+        this->Y = Y;
+        this->Z = Z;
+    }
+    int getX() { return X; }
+    double getY() { return Y; }
+    string getZ() { return Z; }
+    UserClass operator + (UserClass& b)
+    {
+        UserClass temp;
+        temp.X = X + b.X;
+        temp.Y = Y + b.Y;
+        temp.Z = Z + b.Z;
+        return temp;
+}
+    friend ostream& operator << (ostream& t, UserClass& obj);
+};
+ostream& operator << (ostream& t, UserClass& obj)
+{
+t << "\nint = " << obj.X << "\ndouble = " << obj.Y << "\nstring = " << obj.Z<<endl;
+return t; }
+int main() {
+    srand(time(0));
+    cout << "\nDEFAULT TYPES OF DATA:\n";
+    Myclass <int> intA, intB, intC;
+    for (int i = 0; i < N; i++)
+        intA[i] = rand() % 50;
+    for (int i = 0; i < N; i++)
+        intB[i] = rand() % 50;
+    cout << "int array A: ";
+    intA.Show_ar();
+    cout << "int array B: ";
+    intB.Show_ar();
+    cout << "int array C=A+B: ";
+    intC = intA + intB;
+    intC.Show_ar();
+    cout << endl;
+    Myclass<double> doubleA, doubleB, doubleC;
+    for (int i = 0; i < N; i++)
+doubleA[i] = double (rand() % 500) / 5; for (int i = 0; i < N; i++)
+doubleB[i] = double (rand() % 500) / 5; cout << "double array A: "; doubleA.Show_ar();
+cout << "double array B: "; doubleB.Show_ar();
+    cout << "double array C=A+B: ";
+    doubleC = doubleA + doubleB;
+    doubleC.Show_ar();
+    cout << "\n\nUSER TYPES OF DATA:";
+    UserClass A(2,3.4,"firstobject"), B(5,1.3,"secondobject"), C;
+    Myclass <UserClass> obj;
+    obj.Set_ar(A,0);
+
+obj.Set_ar(B,1);
+    obj.Set_ar(C,2);
+    obj[2] = obj[0] + obj[1];
+    obj.Show_ar();
+}
